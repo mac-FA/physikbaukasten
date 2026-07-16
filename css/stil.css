@@ -1,0 +1,194 @@
+/* ===== Physik Baukasten – Stil ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --papier: #fdf6e9;
+  --tinte: #3a3352;
+  --tinte-hell: #6b6489;
+  --karte: #ffffff;
+  --akzent: #ff8c42;
+  --schatten: 0 6px 0 rgba(58, 51, 82, 0.12);
+  --radius: 22px;
+}
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: "Segoe UI", "Comic Sans MS", system-ui, sans-serif;
+  background: var(--papier);
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(255, 140, 66, 0.07) 0 120px, transparent 121px),
+    radial-gradient(circle at 85% 70%, rgba(66, 165, 245, 0.08) 0 160px, transparent 161px),
+    radial-gradient(circle at 70% 15%, rgba(126, 211, 33, 0.07) 0 100px, transparent 101px);
+  color: var(--tinte);
+  min-height: 100vh;
+}
+
+#app { max-width: 980px; margin: 0 auto; padding: 16px 16px 60px; }
+
+button { font-family: inherit; cursor: pointer; border: none; color: inherit; }
+
+/* ===== Kopfzeile ===== */
+.kopf {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; padding: 10px 0 18px; flex-wrap: wrap;
+}
+.kopf h1 { font-size: 1.9rem; letter-spacing: 0.5px; }
+.kopf h1 .wackel { display: inline-block; animation: wackeln 3s ease-in-out infinite; }
+@keyframes wackeln { 0%,100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
+.kopf .untertitel { font-size: 0.95rem; color: var(--tinte-hell); width: 100%; margin-top: -6px; }
+.kopf-knoepfe { display: flex; gap: 10px; align-items: center; }
+
+.stern-zaehler {
+  background: #fff3c4; border: 3px solid #f5c518; border-radius: 999px;
+  padding: 6px 16px; font-weight: 700; font-size: 1.05rem;
+  box-shadow: var(--schatten);
+}
+
+.runder-knopf {
+  width: 48px; height: 48px; border-radius: 50%; font-size: 1.4rem;
+  background: var(--karte); border: 3px solid var(--tinte);
+  box-shadow: var(--schatten); transition: transform 0.1s;
+}
+.runder-knopf:active { transform: scale(0.92); }
+
+/* ===== Welt-Karten (Startseite) ===== */
+.welt-gitter {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 16px;
+}
+.welt-karte {
+  background: var(--karte); border-radius: var(--radius);
+  border: 3px solid var(--tinte); box-shadow: var(--schatten);
+  padding: 18px 16px; text-align: left; position: relative; overflow: hidden;
+  transition: transform 0.12s ease;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.welt-karte:hover { transform: translateY(-4px) rotate(-0.5deg); }
+.welt-karte .band { position: absolute; inset: 0 0 auto 0; height: 10px; }
+.welt-karte .emoji { font-size: 2.6rem; line-height: 1; margin-top: 8px; }
+.welt-karte h2 { font-size: 1.15rem; }
+.welt-karte p { font-size: 0.85rem; color: var(--tinte-hell); line-height: 1.35; }
+.welt-karte .fortschritt { font-size: 0.85rem; font-weight: 700; margin-top: auto; padding-top: 6px; }
+
+.zufall-leiste { margin-top: 22px; text-align: center; }
+.grosser-knopf {
+  background: var(--akzent); color: #fff; font-size: 1.15rem; font-weight: 700;
+  padding: 14px 28px; border-radius: 999px; border: 3px solid var(--tinte);
+  box-shadow: var(--schatten); transition: transform 0.1s;
+}
+.grosser-knopf:active { transform: scale(0.95); }
+
+/* ===== Welt-Seite (Stationsliste) ===== */
+.zurueck-leiste { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+.zurueck-knopf {
+  background: var(--karte); border: 3px solid var(--tinte); border-radius: 999px;
+  padding: 8px 18px; font-size: 1rem; font-weight: 700; box-shadow: var(--schatten);
+}
+.welt-titel { font-size: 1.5rem; display: flex; align-items: center; gap: 10px; }
+
+.station-liste { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+.station-karte {
+  background: var(--karte); border: 3px solid var(--tinte); border-radius: var(--radius);
+  box-shadow: var(--schatten); padding: 16px; text-align: left;
+  display: flex; gap: 14px; align-items: center; transition: transform 0.12s;
+}
+.station-karte:hover { transform: translateY(-3px); }
+.station-karte .emoji { font-size: 2.2rem; }
+.station-karte h3 { font-size: 1.05rem; margin-bottom: 3px; }
+.station-karte p { font-size: 0.82rem; color: var(--tinte-hell); }
+.station-karte .stern { margin-left: auto; font-size: 1.3rem; }
+
+/* ===== Stations-Seite (Demo) ===== */
+.station-kopf { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+.station-kopf h2 { font-size: 1.35rem; flex: 1; min-width: 200px; }
+
+.buehne {
+  background: var(--karte); border: 3px solid var(--tinte); border-radius: var(--radius);
+  box-shadow: var(--schatten); overflow: hidden; position: relative;
+}
+.buehne canvas { display: block; width: 100%; height: auto; touch-action: none; }
+
+.regler-kasten {
+  background: var(--karte); border: 3px solid var(--tinte); border-radius: var(--radius);
+  box-shadow: var(--schatten); padding: 16px 20px; margin-top: 14px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.regler-zeile { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.regler-zeile label { font-weight: 700; min-width: 130px; font-size: 0.95rem; }
+.regler-zeile input[type="range"] { flex: 1; min-width: 160px; accent-color: var(--akzent); height: 34px; }
+.regler-wert {
+  min-width: 110px; text-align: center; font-weight: 700; font-size: 0.95rem;
+  background: var(--papier); border-radius: 10px; padding: 6px 10px;
+  border: 2px dashed var(--tinte-hell);
+}
+.knopf-zeile { display: flex; gap: 10px; flex-wrap: wrap; }
+.aktions-knopf {
+  background: #42a5f5; color: white; font-weight: 700; font-size: 1rem;
+  padding: 10px 20px; border-radius: 999px; border: 3px solid var(--tinte);
+  box-shadow: var(--schatten); transition: transform 0.1s;
+}
+.aktions-knopf:active { transform: scale(0.93); }
+.aktions-knopf.neustart { background: #9e9e9e; }
+
+.erklaer-kasten {
+  margin-top: 14px; display: grid; gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+.sprech-blase {
+  background: var(--karte); border: 3px solid var(--tinte); border-radius: var(--radius);
+  box-shadow: var(--schatten); padding: 16px 18px; font-size: 0.98rem; line-height: 1.5;
+}
+.sprech-blase h4 { font-size: 1rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+.sprech-blase.wow { background: #fff9e3; }
+
+.nav-leiste { display: flex; justify-content: space-between; gap: 10px; margin-top: 18px; }
+.nav-knopf {
+  background: var(--karte); border: 3px solid var(--tinte); border-radius: 999px;
+  padding: 10px 20px; font-weight: 700; font-size: 0.95rem; box-shadow: var(--schatten);
+}
+.nav-knopf:disabled { opacity: 0.35; cursor: default; }
+
+.stern-blitz {
+  position: fixed; font-size: 3rem; pointer-events: none; z-index: 99;
+  animation: sternflug 1s ease-out forwards;
+}
+@keyframes sternflug {
+  0% { transform: scale(0.3) rotate(0deg); opacity: 0; }
+  30% { transform: scale(1.4) rotate(20deg); opacity: 1; }
+  100% { transform: scale(1) rotate(360deg) translateY(-80px); opacity: 0; }
+}
+
+@media (max-width: 560px) {
+  .kopf h1 { font-size: 1.45rem; }
+  .regler-zeile label { min-width: 100%; }
+  .regler-wert { min-width: 90px; }
+}
+
+/* ===== Dunkel-Modus ===== */
+body.dunkel {
+  --papier: #1b1930;
+  --tinte: #eae6f8;
+  --tinte-hell: #a9a2c8;
+  --karte: #2a2743;
+  --schatten: 0 6px 0 rgba(0, 0, 0, 0.45);
+  background-image:
+    radial-gradient(circle at 15% 20%, rgba(255, 140, 66, 0.06) 0 120px, transparent 121px),
+    radial-gradient(circle at 85% 70%, rgba(66, 165, 245, 0.07) 0 160px, transparent 161px),
+    radial-gradient(circle at 70% 15%, rgba(126, 211, 33, 0.06) 0 100px, transparent 101px);
+}
+body.dunkel .stern-zaehler { color: #3a3352; }
+body.dunkel .sprech-blase.wow { background: #3b3524; }
+body.dunkel .welt-karte .fortschritt { color: var(--tinte) !important; }
+body.dunkel .welt-karte,
+body.dunkel .station-karte,
+body.dunkel .buehne,
+body.dunkel .regler-kasten,
+body.dunkel .sprech-blase,
+body.dunkel .nav-knopf,
+body.dunkel .zurueck-knopf,
+body.dunkel .runder-knopf {
+  border-color: #4b4670;
+}
+body.dunkel .aktions-knopf,
+body.dunkel .grosser-knopf { border-color: #4b4670; }
