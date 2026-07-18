@@ -230,10 +230,10 @@ Baukasten.demo('wasser', {
     { key: 'luft', label: 'Aufpusten', min: 0.3, max: 1, step: 0.01, start: 0.7,
       format: v => v < 0.5 ? '💨 Ein Puster' : v < 0.8 ? '😤 Kräftig' : '🥵 Bis zum Platzen!' }
   ],
-  neustartBei: ['luft'],
   knoepfe: [
     { label: '✋ Loslassen!', tue: (s, p) => {
-        if (!s.fliegt) { s.fliegt = true; s.tank = p.luft * 1.6; }
+        s.x = 100; s.v = 0; s.wolken = []; s.wackel = 0;
+        s.fliegt = true; s.tank = p.luft * 1.6;
       } }
   ],
   init(s, p) {
@@ -370,7 +370,6 @@ Baukasten.demo('wasser', {
     { key: 'gewicht', label: 'Wer springt?', min: 1, max: 4, step: 0.1, start: 2,
       format: v => v < 2 ? '🐭 Maus' : v < 3 ? '🧸 Teddy' : '🐘 Elefant' }
   ],
-  neustartBei: ['gewicht'],
   knoepfe: [
     { label: '🛫 Absprung!', tue: (s, p) => {
         s.y = 60; s.vy = 0; s.laeuft = true; s.gelandet = false; s.x = 250 + Math.random() * 300;

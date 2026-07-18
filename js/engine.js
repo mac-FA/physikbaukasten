@@ -272,7 +272,12 @@ const Baukasten = (() => {
         wert.textContent = pd.format ? pd.format(params[pd.key]) : params[pd.key];
       };
       regler.addEventListener('input', () => {
-        params[pd.key] = parseFloat(regler.value);
+        // Exakt aufs Regler-Raster runden: verhindert Fließkomma-Schmutz,
+        // durch den Anzeigen an Schwellen je nach Zieh-Richtung springen
+        const st = parseFloat(pd.step || 1);
+        let v = parseFloat(regler.value);
+        v = Math.round((v - pd.min) / st) * st + pd.min;
+        params[pd.key] = Math.round(v * 1e6) / 1e6;
         zeigWert();
         if ((d.neustartBei || []).includes(pd.key)) neustart();
         verdieneStern(d.id);

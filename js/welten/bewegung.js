@@ -340,7 +340,6 @@ Baukasten.demo('bewegung', {
     { key: 'tempo', label: 'Anrollen', min: 100, max: 350, step: 10, start: 220,
       format: v => v < 180 ? '🐢 Gemütlich' : v < 280 ? '🚶 Flott' : '🐇 Schnell' }
   ],
-  neustartBei: ['m1', 'm2'],
   knoepfe: [
     { label: '🎳 Losrollen!', tue: (s, p) => {
         s.x1 = 100; s.x2 = 450; s.v1 = p.tempo; s.v2 = 0; s.stoesse = 0;
@@ -431,7 +430,6 @@ Baukasten.demo('bewegung', {
     { key: 'laenge', label: 'Schnur-Länge', min: 55, max: 165, step: 1, start: 150,
       format: v => v < 92 ? '📏 Kurz gezogen!' : v < 130 ? '📏 Mittel' : '📏 Lang' }
   ],
-  neustartBei: ['anschwung'],
   knoepfe: [
     { label: '✂️ Loslassen!', tue: (s, p) => {
         if (s.frei) return;
@@ -449,11 +447,17 @@ Baukasten.demo('bewegung', {
     s.radius = p.laenge;
     // Der Drehschwung ist der Schatz, der IMMER erhalten bleibt
     s.drehschwung = p.anschwung * p.laenge * p.laenge;
+    s.merkAnschwung = p.anschwung;
     s.omega = p.anschwung;
     s.bx = 0; s.by = 0; s.bvx = 0; s.bvy = 0; s.spur = [];
   },
   schritt(s, p, dt) {
     if (!s.frei) {
+      // Neuer Anschwung? Sanft übernehmen, OHNE die Drehung zu resetten
+      if (p.anschwung !== s.merkAnschwung) {
+        s.drehschwung = p.anschwung * s.radius * s.radius;
+        s.merkAnschwung = p.anschwung;
+      }
       // Schnur sanft auf Wunschlänge kurbeln
       s.radius += (p.laenge - s.radius) * Math.min(1, 4 * dt);
       // Pirouetten-Effekt: Tempo folgt immer aus dem gespeicherten Drehschwung.
