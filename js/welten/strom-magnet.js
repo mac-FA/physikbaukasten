@@ -22,7 +22,7 @@ Baukasten.demo('strom', {
     immer nach Norden – sie wird von der Erde festgehalten wie deine Büroklammern hier.`,
   params: [
     { key: 'staerke', label: 'Magnet-Stärke', min: 40, max: 160, step: 1, start: 90,
-      format: v => v < 70 ? '🧲 Kühlschrank-Magnet' : v < 120 ? '🧲 Kräftig' : '🧲 SUPER-Magnet' }
+      format: v => v < 70 ? '🧲 Kühlschrank' : v < 120 ? '🧲 Kräftig' : '🧲 SUPER-Magnet' }
   ],
   init(s) {
     s.mx = 400; s.my = 150;

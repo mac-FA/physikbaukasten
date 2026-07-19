@@ -118,9 +118,14 @@ button { font-family: inherit; cursor: pointer; border: none; color: inherit; }
 .regler-zeile label { font-weight: 700; min-width: 130px; font-size: 0.95rem; }
 .regler-zeile input[type="range"] { flex: 1; min-width: 160px; accent-color: var(--akzent); height: 34px; }
 .regler-wert {
-  min-width: 110px; text-align: center; font-weight: 700; font-size: 0.95rem;
-  background: var(--papier); border-radius: 10px; padding: 6px 10px;
+  /* FESTE Breite: Die Anzeige darf beim Labelwechsel NIE das Layout
+     verschieben, sonst ruckelt der Slider unter dem Finger! */
+  flex: 0 0 172px;
+  width: 172px;
+  text-align: center; font-weight: 700; font-size: 0.9rem;
+  background: var(--papier); border-radius: 10px; padding: 6px 4px;
   border: 2px dashed var(--tinte-hell);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .knopf-zeile { display: flex; gap: 10px; flex-wrap: wrap; }
 .aktions-knopf {
@@ -162,7 +167,7 @@ button { font-family: inherit; cursor: pointer; border: none; color: inherit; }
 @media (max-width: 560px) {
   .kopf h1 { font-size: 1.45rem; }
   .regler-zeile label { min-width: 100%; }
-  .regler-wert { min-width: 90px; }
+  .regler-wert { flex: 0 0 148px; width: 148px; font-size: 0.82rem; }
 }
 
 /* ===== Dunkel-Modus ===== */

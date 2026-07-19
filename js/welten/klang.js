@@ -50,8 +50,8 @@ Baukasten.demo('klang', {
     const x1 = 400 - p.laenge / 2, x2 = 400 + p.laenge / 2, y = 250;
     PBU.kreis(ctx, x1, y, 10, '#3a3352');
     PBU.kreis(ctx, x2, y, 10, '#3a3352');
-    // Saite als schwingende Kurve
-    ctx.strokeStyle = '#e63946'; ctx.lineWidth = 3 + (2 - p.spannung);
+    // Saite als schwingende Kurve – tiefschwarz für satten Kontrast
+    ctx.strokeStyle = '#111118'; ctx.lineWidth = 3 + (2 - p.spannung);
     ctx.beginPath();
     for (let i = 0; i <= 60; i++) {
       const t = i / 60;
